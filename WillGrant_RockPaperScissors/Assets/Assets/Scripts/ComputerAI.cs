@@ -81,8 +81,8 @@ public class ComputerAI : MonoBehaviour
     /// <summary>
     /// Randomly selects action based on weightings.
     /// </summary>
-    /// <returns></returns>
-    int RandomWeighted()
+    /// <returns> int from 0-3 (exclusive)</returns>
+    private int RandomWeighted()
     {
         int result = 0, total = 0;
         int randVal = UnityEngine.Random.Range(0, weightTotal + 1);

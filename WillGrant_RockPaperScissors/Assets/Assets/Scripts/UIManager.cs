@@ -61,21 +61,21 @@ public class UIManager : MonoBehaviour
     /// Updates UI Text Elements
     /// </summary>
     /// <param name="Outcome">Outcome of the game</param>
-    private void UpdateTextResults(string Outcome)
+    private void UpdateTextResults(winStates Outcome)
     {
 
-        resultText.text = Outcome;
-        if (Outcome == "PlayerWin")
+        resultText.text = Outcome.ToString(); ;
+        if (Outcome == winStates.PlayerWin)
         {
             wins += 1;
             playerWinText.text = wins.ToString();
         }
-        if (Outcome == "ComputerWin")
+        if (Outcome == winStates.ComputerWin)
         {
             losses += 1;
             computerWinText.text = losses.ToString();
         }
-        if (Outcome == "Tie")
+        if (Outcome == winStates.Tie)
         {
             ties += 1;
             tieText.text = ties.ToString();

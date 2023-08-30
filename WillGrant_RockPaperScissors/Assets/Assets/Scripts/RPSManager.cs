@@ -11,6 +11,12 @@ public enum actionChoices
     Paper,//1
     Scissors//2
 };
+public enum winStates
+{
+    PlayerWin,//0
+    ComputerWin,//1
+    Tie//2
+};
 
 [RequireComponent(typeof(ComputerAI))]
 public class RPSManager : MonoBehaviour
@@ -24,12 +30,7 @@ public class RPSManager : MonoBehaviour
         ComputerAI = GetComponent<ComputerAI>();
     }
 
-    private enum winStates 
-    { 
-        PlayerWin,//0
-        ComputerWin,//1
-        Tie//2
-    };
+
     /// <summary>
     /// A 3x3 matrix for outcomes with player choice along the Y axis, and computer choice along the Y axis. 
     /// </summary>
@@ -42,7 +43,7 @@ public class RPSManager : MonoBehaviour
     };
     private winStates winStateResult;
     public ComputerAI ComputerAI { get => computerAI; set => computerAI = value; }
-    public static event Action<string> OnResultsDetermined;
+    public static event Action<winStates> OnResultsDetermined;
 
     /// <summary>
     /// Takes player action and computer action, then determines a winner.
@@ -69,7 +70,7 @@ public class RPSManager : MonoBehaviour
     /// </summary>
     private void PostGameUpdate()
     {
-        OnResultsDetermined?.Invoke(winStateResult.ToString());
+        OnResultsDetermined?.Invoke(winStateResult);
         //Save a history of player choices for the AI to learn from
         playerPastChoices.Add((actionChoices)playerChoice);
         ComputerAI.UpdateHistory(playerPastChoices);
